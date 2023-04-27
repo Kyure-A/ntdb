@@ -4,6 +4,8 @@
 This Discord bot is designed to post an embedded train delaying information to a channel via webhook.
 
 ## Demo
+![demo](https://user-images.githubusercontent.com/49436968/234833632-518a66c0-4d7d-4513-8ed7-af1ec31b3608.png)
+
 
 ## Requirement
 - Node.js
