@@ -1,4 +1,4 @@
-# Time Table Posting bot for Discord
+# Train Delaying Notification Bot for Discord
 
 ## Description
 This Discord bot is designed to post an embedded schedule from a schedule registered on a Google Spreadsheet (see example.xlsx) to a channel via webhook.
