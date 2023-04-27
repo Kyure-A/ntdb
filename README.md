@@ -1,11 +1,9 @@
 # Train Delaying Notification Bot for Discord
 
 ## Description
-This Discord bot is designed to post an embedded schedule from a schedule registered on a Google Spreadsheet (see example.xlsx) to a channel via webhook.
+This Discord bot is designed to post an embedded train delaying information to a channel via webhook.
 
 ## Demo
-![Demo](https://user-images.githubusercontent.com/49436968/232452515-ea5d1836-5795-4b22-a4f3-61dc1c563267.png)
-
 
 ## Requirement
 - Node.js
@@ -26,8 +24,7 @@ Please create a .clasp.json file in the following format:
 To use this code in a Google Apps Script project after registering the script ID, please execute the following command:
 
 ``` shell
-yarn build
-clasp push
+npm run build
 ```
 
 Please create a similar file using the attached example.xlsx as a template, and remember to enter the Webhook URL in the property service when doing so, as it should work.
