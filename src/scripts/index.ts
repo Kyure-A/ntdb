@@ -54,7 +54,7 @@ export function postToDiscord() {
         "embeds": [
             {
                 "title": "遅延情報",
-                "fields": genFields
+                "fields": genFields()
             }
         ]
     }
@@ -66,12 +66,6 @@ export function postToDiscord() {
     }
 
     UrlFetchApp.fetch(discord_url!, param);
-}
-
-export function test() {
-    const json = parseDelayingData("大阪環状線");
-    console.log(json[0]);
-    console.log(json[1]);
 }
 
 export function main() {
