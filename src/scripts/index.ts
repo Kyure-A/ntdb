@@ -45,7 +45,7 @@ export function parseDelayingData(line: string): string[] {
 export function titleBuilder() {
     let title = "遅延情報 ";
     const date = new Date();
-    title += "(" + Utilities.formatDate(date, "JST", "M/dd") + " " + String(date.getHours()) + ":" + String(date.getMinutes()) " 現在)";
+    title += "(" + Utilities.formatDate(date, "JST", "M/dd") + " " + String(date.getHours()) + ":" + String(date.getMinutes()) + " 現在)";
     return title;
 }
 
