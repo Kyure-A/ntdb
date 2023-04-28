@@ -41,14 +41,6 @@ export function parseDelayingData(line: string): string[] {
     return [title, description];
 }
 
-export function test() {
-    const parsed = parse(getTrainDelaying(train_line_list[0])).querySelector("#mdServiceStatus")?.toString();
-    const json = himalaya.parse(parsed)[0];
-    const json_str = himalaya.stringify(json);
-    console.log(train_line_list[0]);
-    console.log(json_str);
-}
-
 export function titleBuilder() {
     let title: string = "遅延情報 ";
     const date: Date = new Date();
