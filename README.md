@@ -29,8 +29,6 @@ To use this code in a Google Apps Script project after registering the script ID
 npm run build
 ```
 
-Please create a similar file using the attached example.xlsx as a template, and remember to enter the Webhook URL in the property service when doing so, as it should work.
-
 ## License
 [GPL 3.0](https://github.com/Kyure-A)
 
