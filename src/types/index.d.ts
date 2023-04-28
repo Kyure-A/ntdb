@@ -1,4 +1,4 @@
-type TimeTable = {
+type Embed = {
     name: string
     value: string
     inline: boolean
@@ -6,7 +6,7 @@ type TimeTable = {
 
 type Embeds = {
     title: string
-    fields: TimeTable[]
+    fields: Embed[]
 }
 
 type DiscordMessage = {

@@ -5,20 +5,19 @@ const himalaya = require("himalaya");
 
 export function newTrigger(): void {
     for (let trigger of ScriptApp.getScriptTriggers()) {
-        let function_name = trigger.getHandlerFunction();
-        if (function_name == "main") ScriptApp.deleteTrigger(trigger);
+        let function_name: string = trigger.getHandlerFunction();
+        if (function_name == "main" || function_name == "newTrigger") ScriptApp.deleteTrigger(trigger);
     }
 
-    let now = new Date();
-    let year = now.getFullYear();
-    let month = now.getMonth();
-    let day = now.getDate();
-    let date1 = new Date(year, month, day + 1, 7, 30);
-    let date2 = new Date(year, month, day + 1, 8, 30);
-    let date3 = new Date(year, month, day + 1, 8, 0);
-    ScriptApp.newTrigger("main").timeBased().at(date1).create();
-    ScriptApp.newTrigger("main").timeBased().at(date2).create();
-    ScriptApp.newTrigger("main").timeBased().at(date3).create();
+    let now: Date = new Date();
+    let time: number[][] = [[7, 30], [8, 0], [8, 30]];
+
+    for (let i = 0; i < 3; i++) {
+        let date: Date = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, time[i][0], time[i][1]);
+        ScriptApp.newTrigger("main").timeBased().at(date).create();
+    }
+    let trigger_date = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 19, 0);
+    ScriptApp.newTrigger("newTrigger").timeBased().at(trigger_date).create();
 }
 
 export function getTrainDelaying(line: string): string {
@@ -42,23 +41,31 @@ export function parseDelayingData(line: string): string[] {
     return [title, description];
 }
 
+export function test() {
+    const parsed = parse(getTrainDelaying(train_line_list[0])).querySelector("#mdServiceStatus")?.toString();
+    const json = himalaya.parse(parsed)[0];
+    const json_str = himalaya.stringify(json);
+    console.log(train_line_list[0]);
+    console.log(json_str);
+}
+
 export function titleBuilder() {
-    let title = "遅延情報 ";
-    const date = new Date();
+    let title: string = "遅延情報 ";
+    const date: Date = new Date();
     title += "(" + Utilities.formatDate(date, "JST", "M/dd") + " " + String(date.getHours()) + ":" + String(date.getMinutes()) + " 現在)";
     return title;
 }
 
 export function fieldsBuilder() {
-    let fields = [];
+    let fields: Embed[] = [];
 
     for (let i = 0; i < train_line_list.length; i++) {
-        const train_line = train_line_list[i];
+        const train_line: string = train_line_list[i];
         const parsed_html = parseDelayingData(train_line);
         const title: string = parsed_html[0];
         const description: string = parsed_html[1];
 
-        const json = {
+        const json: Embed = {
             "name": train_line + "(" + title + ")",
             "value": description,
             "inline": false
@@ -75,7 +82,7 @@ export function postToDiscord(): void {
 
     const discord_url: string | null = PropertiesService.getDocumentProperties().getProperty("discord");
 
-    const message = {
+    const message: DiscordMessage = {
         "embeds": [
             {
                 "title": titleBuilder(),
@@ -95,5 +102,4 @@ export function postToDiscord(): void {
 
 export function main(): void {
     postToDiscord();
-    newTrigger();
 }
