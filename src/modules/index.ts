@@ -1,4 +1,4 @@
-import { parse } from "node-html-parser"
+gimport { parse } from "node-html-parser"
 import { train_line_list } from "./train_line_list";
 import { train_line_url } from "./train_line_list"
 const himalaya = require("himalaya");
@@ -44,7 +44,7 @@ export function parseDelayingData(line: string): string[] {
 export function titleBuilder() {
     let title: string = "遅延情報 ";
     const date: Date = new Date();
-    title += "(" + Utilities.formatDate(date, "JST", "M/dd") + " " + String(date.getHours()) + ":" + String(date.getMinutes()) + " 現在)";
+    title += "(" + Utilities.formatDate(date, "JST", "M/dd H:mm") + " 現在)";
     return title;
 }
 
