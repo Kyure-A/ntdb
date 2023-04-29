@@ -1,4 +1,4 @@
-gimport { parse } from "node-html-parser"
+import { parse } from "node-html-parser"
 import { train_line_list } from "./train_line_list";
 import { train_line_url } from "./train_line_list"
 const himalaya = require("himalaya");
