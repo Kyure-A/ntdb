@@ -55,7 +55,7 @@ export function fieldsBuilder() {
         const train_line: string = train_line_list[i];
         const parsed_html = parseDelayingData(train_line);
         let title: string = parsed_html[0];
-        if (title != "平常運転") title += "⚠️";
+        if (title != "平常運転") title = "⚠️ " + title;
         const description: string = parsed_html[1];
 
         const json: Embed = {
