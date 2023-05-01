@@ -44,7 +44,7 @@ export function parseDelayingData(line: string): string[] {
 export function titleBuilder() {
     let title: string = "遅延情報 ";
     const date: Date = new Date();
-    title += "(" + Utilities.formatDate(date, "JST", "M/dd H:mm") + " 現在)";
+    title += Utilities.formatDate(date, "JST", "(M/dd H:mm 現在)");
     return title;
 }
 
@@ -55,7 +55,7 @@ export function fieldsBuilder() {
         const train_line: string = train_line_list[i];
         const parsed_html = parseDelayingData(train_line);
         let title: string = parsed_html[0];
-        if (title != "平常運転") title += "⚠";
+        if (title != "平常運転") title += "⚠️";
         const description: string = parsed_html[1];
 
         const json: Embed = {
@@ -68,6 +68,10 @@ export function fieldsBuilder() {
     }
 
     return fields;
+}
+
+export function test(): void {
+    console.log(fieldsBuilder());
 }
 
 export function postToDiscord(): void {
