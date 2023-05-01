@@ -9,14 +9,17 @@ export function newTrigger(): void {
         if (function_name == "main" || function_name == "newTrigger") ScriptApp.deleteTrigger(trigger);
     }
 
-    let now: Date = new Date();
-    let time: number[][] = [[7, 30], [8, 0], [8, 30]];
+    const now: Date = new Date();
+    const time: number[][] = [[7, 30], [8, 0], [8, 30]];
+    let plus: 0 | 1 | 2 = 0;
+    if (now.getDay() + 1 == 0) plus = 1; // if tomorrow is Sunday
+    if (now.getDay() + 1 == 6) plus = 2; // if tomorrow is Saturday
 
     for (let i = 0; i < 3; i++) {
-        let date: Date = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, time[i][0], time[i][1]);
+        const date: Date = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1 + plus, time[i][0], time[i][1]);
         ScriptApp.newTrigger("main").timeBased().at(date).create();
     }
-    let trigger_date = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 19, 0);
+    const trigger_date = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1 + plus, 19, 0);
     ScriptApp.newTrigger("newTrigger").timeBased().at(trigger_date).create();
 }
 
