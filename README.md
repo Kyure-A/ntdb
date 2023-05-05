@@ -1,4 +1,4 @@
-# Train Delaying Notification Bot for Discord
+# Notifying Train Delaying Bot for Discord
 
 ## Description
 This Discord bot is designed to post an embedded train delaying information to a channel via webhook.
