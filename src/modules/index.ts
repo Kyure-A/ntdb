@@ -11,15 +11,14 @@ export function newTrigger(): void {
 
     const now: Date = new Date();
     const time: number[][] = [[7, 30], [8, 0], [8, 30]];
-    let plus: 0 | 1 | 2 = 0;
-    if (now.getDay() + 1 == 0) plus = 1; // if tomorrow is Sunday
-    if (now.getDay() + 1 == 6) plus = 2; // if tomorrow is Saturday
+    let plus: 1 | 2 = 1;
+    if (now.getDay() == 5) plus = 2; // if tomorrow is Saturday
 
     for (let i = 0; i < 3; i++) {
-        const date: Date = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1 + plus, time[i][0], time[i][1]);
+        const date: Date = new Date(now.getFullYear(), now.getMonth(), now.getDate() + plus, time[i][0], time[i][1]);
         ScriptApp.newTrigger("main").timeBased().at(date).create();
     }
-    const trigger_date = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1 + plus, 19, 0);
+    const trigger_date = new Date(now.getFullYear(), now.getMonth(), now.getDate() + plus, 19, 0);
     ScriptApp.newTrigger("newTrigger").timeBased().at(trigger_date).create();
 }
 
@@ -47,7 +46,7 @@ export function parseDelayingData(line: string): string[] {
 export function titleBuilder() {
     let title: string = "遅延情報 ";
     const date: Date = new Date();
-    title += Utilities.formatDate(date, "JST", "(M/dd H:mm 現在)");
+    title += Utilities.formatDate(date, "JST", "(M/d H:m 現在)");
     return title;
 }
 
@@ -58,7 +57,7 @@ export function fieldsBuilder() {
         const train_line: string = train_line_list[i];
         const parsed_html = parseDelayingData(train_line);
         let title: string = parsed_html[0];
-        if (title != "平常運転") title = "⚠️ " + title;
+        if (title != "平常運転") title = "⚠️" + title;
         const description: string = parsed_html[1];
 
         const json: Embed = {
