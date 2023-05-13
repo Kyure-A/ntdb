@@ -12,7 +12,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "GPL",
+  "license": "MIT",
   "devDependencies": {
     "@google/clasp": "^2.4.1",
     "@types/google-apps-script": "^1.0.55",
